@@ -1,3 +1,4 @@
+#Deploying mysql pod 
 apiVersion: v1
 kind: Pod
 metadata:
