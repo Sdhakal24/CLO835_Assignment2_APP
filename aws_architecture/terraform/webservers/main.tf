@@ -67,10 +67,10 @@ resource "aws_security_group" "web_server_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Restrict this to your IP for better security
+    cidr_blocks = ["0.0.0.0/0"]  
   }
 
-  # Allow HTTP traffic (Optional: If you plan to serve a frontend)
+  # Allow HTTP traffic 
   ingress {
     description = "HTTP from everywhere"
     from_port   = 80
@@ -86,7 +86,8 @@ ingress {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  # Allow Kubernetes NodePort range (30000-32767)
+
+  # Allow Kubernetes NodePort range 
   ingress {
     description = "Allow NodePort access for Kubernetes services"
     from_port   = 30000
@@ -101,7 +102,7 @@ ingress {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Restrict this if necessary
+    cidr_blocks = ["0.0.0.0/0"]  
   }
 
   # Allow all outbound traffic (default)
@@ -118,7 +119,7 @@ ingress {
 }
 
 resource "aws_ecr_repository" "sql" {
-  name                 = "sql"  # Choose your repository name
+  name                 = "sql"  
   image_tag_mutability = "MUTABLE"  
 
   # Optional lifecycle policy (if needed)
@@ -131,7 +132,7 @@ resource "aws_ecr_repository" "flaskapp" {
   name                 = "flaskapp" 
   image_tag_mutability = "MUTABLE"  
 
-  # Optional lifecycle policy (if needed)
+  # lifecycle policy 
   lifecycle {
     prevent_destroy = true 
   }
