@@ -1,3 +1,5 @@
+#importing the requirements
+
 from flask import Flask, render_template, request
 from pymysql import connections
 import os
@@ -14,7 +16,8 @@ DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT"))
 
-# Create a connection to the MySQL database
+
+# Creating a connection to the MySQL database
 db_conn = connections.Connection(
     host= DBHOST,
     port=DBPORT,
@@ -104,15 +107,17 @@ def FetchData():
     except Exception as e:
         print(e)
 
+
     finally:
         cursor.close()
+
 
     return render_template("getempoutput.html", id=output["emp_id"], fname=output["first_name"],
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], color=color_codes[COLOR])
 
 if __name__ == '__main__':
     
-    # Check for Command Line Parameters for color
+    # Check for Command Line Parameters for colors provided earlier
     parser = argparse.ArgumentParser()
     parser.add_argument('--color', required=False)
     args = parser.parse_args()
@@ -128,9 +133,11 @@ if __name__ == '__main__':
     else:
         print("No command line argument or environment variable. Picking a Random Color =" + COLOR)
 
-    # Check if input color is a supported one
+
+    # Check either the input color is a supported one or not
     if COLOR not in color_codes:
         print("Color not supported. Received '" + COLOR + "' expected one of " + SUPPORTED_COLORS)
         exit(1)
 
     app.run(host='0.0.0.0',port=8080,debug=True)
+
