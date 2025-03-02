@@ -1,8 +1,9 @@
-name: Build and Push the mysql and web application image to the AWS ECR
+name: Build and Push the MySQL and Flask App Image to AWS ECR
 
 on:
-  branches:
-    - main
+  push:
+    branches:
+      - main
 
 jobs:
   build:
