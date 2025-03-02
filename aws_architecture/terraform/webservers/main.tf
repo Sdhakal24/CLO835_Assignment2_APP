@@ -16,7 +16,7 @@ data "aws_ami" "latest_amazon_linux" {
 data "terraform_remote_state" "network" {
   backend = "s3"
   config = {
-    bucket = "clo835-assignment01"
+    bucket = "clo835-assignment02"
     key    = "terraform/network/terraform.tfstate"
     region = "us-east-1"
   }
