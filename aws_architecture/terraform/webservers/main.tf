@@ -79,16 +79,23 @@ resource "aws_security_group" "web_server_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+ingress {
+    description = "HTTP from everywhere"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   # Allow Kubernetes NodePort range (30000-32767)
   ingress {
     description = "Allow NodePort access for Kubernetes services"
     from_port   = 30000
-    to_port     = 32767
+    to_port     = 30000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]  
   }
 
-  # Allow MySQL (ClusterIP won't need this, but useful for external debugging)
+  # Allow MySQL 
   ingress {
     description = "Allow MySQL access (for debugging)"
     from_port   = 3306
