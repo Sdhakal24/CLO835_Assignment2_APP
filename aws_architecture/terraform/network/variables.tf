@@ -9,7 +9,7 @@ variable "default_tags" {
 # Name prefix
 variable "prefix" {
   type        = string
-  default     = "assignment1"
+  default     = "assignment02"
   description = "Name prefix"
 }
 
