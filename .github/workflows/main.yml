@@ -30,17 +30,17 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       # Step 4: Build and Push mysql and app Image
-      - name: Build and Push Flask App Image to Amazon ECR
+      - name: Build and Push Images to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           MYSQL_ECR_REPOSITORY: sql
           APP_ECR_REPOSITORY: flaskapp
           IMAGE_TAG: latest
         run: |
-          # Docker build command
-          docker build -t $ECR_REGISTRY/$MYSQL_ECR_REPOSITORY:$IMAGE_TAG -f ./mysql/Dockerfile_mysql .
-          docker build -t $ECR_REGISTRY/$APP_ECR_REPOSITORY:$IMAGE_TAG -f ./app/Dockerfile .
-          
-          # Push to ECR
+          # Build Docker images
+          docker build -t $ECR_REGISTRY/$MYSQL_ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile_mysql .
+          docker build -t $ECR_REGISTRY/$APP_ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
+      
+          # Push images to ECR
           docker push $ECR_REGISTRY/$MYSQL_ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$APP_ECR_REPOSITORY:$IMAGE_TAG
