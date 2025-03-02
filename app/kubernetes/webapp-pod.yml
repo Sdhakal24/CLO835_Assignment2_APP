@@ -1,4 +1,4 @@
-#pod forr webapp
+#pod for webapp
 apiVersion: v1
 kind: Pod
 metadata:
