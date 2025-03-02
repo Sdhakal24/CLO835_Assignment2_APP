@@ -36,7 +36,7 @@ locals {
 resource "aws_instance" "web_server" {
   ami           = data.aws_ami.latest_amazon_linux.id
   instance_type = var.instance_type
-  # key_name                    = aws_key_pair.web_key.key_name
+   key_name                    = aws_key_pair.web_key.key_name
   subnet_id                   = data.terraform_remote_state.network.outputs.public_subnet_ids
   security_groups             = [aws_security_group.web_server_sg.id]
   associate_public_ip_address = true
@@ -47,11 +47,11 @@ resource "aws_instance" "web_server" {
 }
 
 
-# # Define the key pair for SSH access
-# resource "aws_key_pair" "web_key" {
-#   key_name   = "${var.prefix}-key"
-#   public_key = file(var.ssh_public_key_path)
-# }
+# Define the key pair for SSH access
+resource "aws_key_pair" "web_key" {
+  key_name   = "${var.prefix}-key"
+   public_key = file(var.ssh_public_key_path)
+ }
 
 
 
