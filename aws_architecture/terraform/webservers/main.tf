@@ -54,12 +54,23 @@ resource "aws_instance" "web_server" {
 # }
 
 
-# Create the security group for the web server
+
+# Create the security group for the web server (K8s Node)
 resource "aws_security_group" "web_server_sg" {
   name        = "${local.name_prefix}-web-server-sg"
-  description = "Allow HTTP inbound traffic"
+  description = "Allow necessary inbound traffic for K8s and WebApp"
   vpc_id      = data.terraform_remote_state.network.outputs.vpc_id
 
+  # Allow SSH for remote access
+  ingress {
+    description = "SSH access"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Restrict this to your IP for better security
+  }
+
+  # Allow HTTP traffic (Optional: If you plan to serve a frontend)
   ingress {
     description = "HTTP from everywhere"
     from_port   = 80
@@ -68,6 +79,25 @@ resource "aws_security_group" "web_server_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Allow Kubernetes NodePort range (30000-32767)
+  ingress {
+    description = "Allow NodePort access for Kubernetes services"
+    from_port   = 30000
+    to_port     = 32767
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  
+  }
+
+  # Allow MySQL (ClusterIP won't need this, but useful for external debugging)
+  ingress {
+    description = "Allow MySQL access (for debugging)"
+    from_port   = 3306
+    to_port     3306
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Restrict this if necessary
+  }
+
+  # Allow all outbound traffic (default)
   egress {
     from_port   = 0
     to_port     = 0
