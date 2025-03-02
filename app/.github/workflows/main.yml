@@ -1,3 +1,5 @@
+#adding the github workflows for building and publishing docker image 
+
 name: Build and Push the mysql and web application image to the AWS ECR
 
 on:
