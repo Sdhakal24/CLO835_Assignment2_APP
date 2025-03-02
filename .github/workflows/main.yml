@@ -1,15 +1,11 @@
 name: Build and Push the mysql and web application image to the AWS ECR
 
 on:
-  pull_request:
-    branches:
-      - main
-    types:
-      - closed
+  branches:
+    - main
 
 jobs:
   build:
-    if: github.event.pull_request.merged == true
     name: Build the docker image
     runs-on: ubuntu-latest
 
