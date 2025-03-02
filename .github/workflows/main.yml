@@ -37,6 +37,7 @@ jobs:
           APP_ECR_REPOSITORY: flaskapp
           IMAGE_TAG: latest
         run: |
+          cd app/
           # Build Docker images
           docker build -t $ECR_REGISTRY/$MYSQL_ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile_mysql .
           docker build -t $ECR_REGISTRY/$APP_ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
