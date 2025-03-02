@@ -1,4 +1,4 @@
-#Replica set for webappS
+#Replica set for webapp
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
