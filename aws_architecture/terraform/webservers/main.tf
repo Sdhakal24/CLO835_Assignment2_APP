@@ -92,7 +92,7 @@ resource "aws_security_group" "web_server_sg" {
   ingress {
     description = "Allow MySQL access (for debugging)"
     from_port   = 3306
-    to_port     3306
+    to_port     = 3306
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]  # Restrict this if necessary
   }
