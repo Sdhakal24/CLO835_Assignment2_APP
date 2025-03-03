@@ -49,8 +49,8 @@ resource "aws_instance" "web_server" {
 
 # Define the key pair for SSH access
 resource "aws_key_pair" "web_key" {
-  key_name   = "${var.prefix}-key"
-   public_key = file(var.ssh_public_key_path)
+  key_name   = "assignments"
+   public_key = file("./assignments.pub")
  }
 
 
