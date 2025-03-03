@@ -41,11 +41,12 @@ resource "aws_instance" "web_server" {
   security_groups             = [aws_security_group.web_server_sg.id]
   associate_public_ip_address = true
 
-  root_block_device {
-    volume_size = 64
-    volume_type = "gp2"
-  }
-
+ root_block_device {
+   volume_size = 64
+   volume_type = "gp2"
+ }
+ 
+ 
   tags = merge(var.default_tags, {
     "Name" = "${var.prefix}-WebServer"
   })
