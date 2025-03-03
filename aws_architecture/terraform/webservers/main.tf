@@ -42,9 +42,9 @@ resource "aws_instance" "web_server" {
   associate_public_ip_address = true
 
   root_block_device {
-      volume_size = 64
-      volume_type = "gp2"
-    }
+    volume_size = 64
+    volume_type = "gp2"
+  }
 
   tags = merge(var.default_tags, {
     "Name" = "${var.prefix}-WebServer"
