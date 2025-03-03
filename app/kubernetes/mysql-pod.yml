@@ -3,17 +3,17 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: mysql-pod
-  namespace: clo835
+  namespace: mysql-ns
   labels:
     app: mysql
 spec:
   containers:
-    - name: mysql
-      image: <ECR_REGISTRY>/sql:latest
-      ports:
-        - containerPort: 3306
-      env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: "root"
-        - name: MYSQL_DATABASE
-          value: "employees"
+  - name: mysql
+    image: [YOUR-ECR-REPO-URI]/mysql:latest
+    ports:
+    - containerPort: 3306
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: "db_pass123"  # In production, use secrets for passwords
+    - name: MYSQL_DATABASE
+      value: "employees"
