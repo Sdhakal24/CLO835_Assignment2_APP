@@ -2,20 +2,31 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: webapp-replicaset
-  namespace: clo835
+  name: webapp-rs
+  namespace: webapp-ns
 spec:
-  replicas: 3
+  replicas: 3  # Running 3 replicas as required in the assignment
   selector:
     matchLabels:
-      app: webapp
+      app: employees
   template:
     metadata:
       labels:
-        app: webapp
+        app: employees
     spec:
       containers:
-        - name: webapp
-          image: <ECR_REGISTRY>/flaskapp:latest
-          ports:
-            - containerPort: 5000
+      - name: webapp
+        image: [YOUR-ECR-REPO-URI]/webapp:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DBHOST
+          value: "mysql-svc.mysql-ns.svc.cluster.local"
+        - name: DBPORT
+          value: "3306"
+        - name: DBUSER
+          value: "root"
+        - name: DBPWD
+          value: "db_pass123"  # In production, use secrets for passwords
+        - name: DBNAME
+          value: "employees"
