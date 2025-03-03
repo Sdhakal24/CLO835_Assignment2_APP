@@ -4,9 +4,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-deployment
-  namespace: clo835
+  namespace: mysql-ns
 spec:
-  replicas: 1
+  replicas: 1  # MySQL typically runs as a single instance
   selector:
     matchLabels:
       app: mysql
@@ -16,7 +16,12 @@ spec:
         app: mysql
     spec:
       containers:
-        - name: mysql
-          image: <ECR_REGISTRY>/sql:latest
-          ports:
-            - containerPort: 3306
+      - name: mysql
+        image: [YOUR-ECR-REPO-URI]/mysql:latest
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "db_pass123"  # In production, use secrets for passwords
+        - name: MYSQL_DATABASE
+          value: "employees"
