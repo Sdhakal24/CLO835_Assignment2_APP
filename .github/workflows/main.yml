@@ -1,4 +1,4 @@
-#workflow CI/CD pipeline
+# Workflow CI/CD pipeline
 name: Build and Push the MySQL and Flask App Image to AWS ECR
 
 on:
