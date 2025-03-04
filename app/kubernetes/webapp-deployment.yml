@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: [YOUR-ECR-REPO-URI]/webapp:latest
+        image: flaskapp:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
         env:
