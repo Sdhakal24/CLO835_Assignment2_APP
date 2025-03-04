@@ -2,7 +2,7 @@
 variable "instance_type" {
   type        = string
   description = "EC2 Instance type"
-  default     = "t2.micro"
+  default     = "t3.medium"
 }
 
 # Default tags
