@@ -9,7 +9,9 @@ metadata:
 spec:
   containers:
   - name: mysql
-    image: [YOUR-ECR-REPO-URI]/mysql:latest
+    image: sql:latest
+    imagePullPolicy: Never
+
     ports:
     - containerPort: 3306
     env:
