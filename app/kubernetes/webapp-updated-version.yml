@@ -4,7 +4,7 @@ metadata:
   name: webapp-deployment
   namespace: webapp-ns
 spec:
-  replicas: 3  # Running 3 replicas 
+  replicas: 3  # Running 3 replicas
   selector:
     matchLabels:
       app: employees
@@ -15,10 +15,12 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: [YOUR-ECR-REPO-URI]/webapp:v2  # Updated version
+        image: flaskapp:latest  # Updated version
         ports:
         - containerPort: 8080
         env:
+        - name: APP_COLOR
+          value: "pink"  # Removed the extra space character
         - name: DBHOST
           value: "mysql-svc.mysql-ns.svc.cluster.local"
         - name: DBPORT
@@ -26,6 +28,6 @@ spec:
         - name: DBUSER
           value: "root"
         - name: DBPWD
-          value: "db_pass123"  # In production, use secrets for passwords
+          value: "db_pass123"  # In production, use secrets
         - name: DBNAME
           value: "employees"
