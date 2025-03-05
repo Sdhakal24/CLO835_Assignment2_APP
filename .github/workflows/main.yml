@@ -1,4 +1,4 @@
-# CI/CD pipeline for workflow for building and pushing both of the docker images
+# CI/CD pipeline for building and pushing both of the docker images
 
 
 name: Build and Push the MySQL and Flask App Image to AWS ECR
