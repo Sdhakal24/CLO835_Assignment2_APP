@@ -124,16 +124,18 @@ ingress {
   })
 }
 
+# ECR repo for  sql (mysql)
 resource "aws_ecr_repository" "sql" {
   name                 = "sql"  
   image_tag_mutability = "MUTABLE"  
 
-  # Optional lifecycle policy (if needed)
+  # lifecycle policy 
   lifecycle {
     prevent_destroy = true  
   }
 }
 
+# ECR repo for flaskapp(webapp)
 resource "aws_ecr_repository" "flaskapp" {
   name                 = "flaskapp" 
   image_tag_mutability = "MUTABLE"  
